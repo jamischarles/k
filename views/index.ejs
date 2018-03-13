@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/boot.min.css' />
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <style>.hidden{display:none} /* Avoids FOUC */</style>
+  </head>
+  <body>
+    <!-- <h1><%= title %></h1> -->
+    <!-- <p>Welcome to <%= title %></p> -->
+
+    <div class="container">
+      <div class="row">
+        <div class="w-100">
+          Masthead here
+
+
+          <div class="search-container">
+            <!-- <button type="button" class="btn btn-primary">Find jobs near me</button> -->
+
+
+          <% if (!locals.terms) { %>
+            <form id="search-form">
+              <label>Search</label>
+              <input placeholder="Location, tags etc..." type="text">
+            </form>
+          <% } %>
+
+
+          </div>
+
+          <br>Tag list is here...<br>
+          <% if (locals.terms) { %>
+            <% for(var k=0; k < terms.length; k++) { %>
+              <a href="/removefilter/<%= terms[k] %>" class="badge badge-secondary"><%= terms[k] %> | x</a>
+            <% } %>
+
+          <% } %>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-lg-9 red">
+          <div class="job-list">
+
+            <% for(var i=0; i < jobData.length; i++) { %>
+              <div class="job-item row">
+                <div class="desc-short col-12">
+                  <div class="job-title"><h5 class="title"><%= jobData[i].title %></h5></div>
+
+                  <div class="">
+                    <span class="meta">
+                      <strong class="company"><a href="/filter/search?company=<%=jobData[i].company %>"><%= jobData[i].company %></a></strong> in
+                      <span class="location"><a href="/filter/search?location=<%=jobData[i].location%>"><%= jobData[i].location %></a></span>
+                    </span>
+
+                    <span class="job-tags">
+
+                      <% for(var j=0; j < jobData[i].tags.length; j++) { %>
+                        <a href="/addfilter/<%= jobData[i].tags[j] %>" class="badge badge-secondary"><%= jobData[i].tags[j] %></a>
+                      <% } %>
+                    </span>
+                  </div>
+                </div>
+
+                <div class="desc-long col-12 hidden">
+
+                  <%- jobData[i].details %>
+                  <button type="button" class="btn btn-primary">Apply</button>
+                </div>
+
+              </div>
+
+            <% } %>
+
+          </div>
+        </div>
+        <div class="col-sm-3 blue hidden">
+          One of three columns <br>
+          right rail will go here...
+        </div>
+      </div>
+    </div>
+
+
+    <script src="/javascripts/main.js"></script>
+
+  </body>
+</html>

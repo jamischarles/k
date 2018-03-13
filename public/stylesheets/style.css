@@ -1,0 +1,67 @@
+body {
+  padding: 50px;
+  font: 14px 'Lucida Grande', Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00b7ff;
+}
+
+.job-list {
+  list-style: none;
+}
+
+/* .job-list > .job-item { */
+.job-item {
+  /* border: 1px solid red; */
+  padding: 12px 15px;
+}
+
+.job-list .job-title .title {
+  display: block;
+  margin-bottom: 0.01rem;
+}
+
+.job-list .meta {
+  font-size: 80%;
+}
+.job-list .job-title .company {
+  display: block;
+  font-weight: bold;
+}
+.job-list .job-title .location {
+  display: block;
+}
+
+.job-list .job-tags {
+  float: right;
+}
+
+.blue {
+  background-color: #666;
+}
+
+.red {
+  background-color: #eee;
+}
+
+.desc-short {
+}
+
+.desc-short:hover {
+  background-color: #f5f5f5;
+  cursor: pointer;
+}
+
+.desc-short .company a, .desc-short .location a{
+  color: inherit;
+}
+
+.desc-long {
+  /* display: none; */
+  margin-top: 25px;
+}
+
+.hidden {
+  display: none;
+}
