@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/boot.min.css' />
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <style>.hidden{display:none} /* Avoids FOUC */</style>
+  </head>
+  <body>
+    <!-- <h1><%= title %></h1> -->
+    <!-- <p>Welcome to <%= title %></p> -->
+
+    <div id="main-container" class="container">
+      <div class="row">
+        <div class="w-100">
+          <% include ./partials/header %>
+
+
+          <script src="https://static.airtable.com/js/embed/embed_snippet_v1.js"></script><iframe class="airtable-embed airtable-dynamic-height" src="https://airtable.com/embed/shrxwXmhcWU2xoydi?backgroundColor=red" frameborder="0" onmousewheel="" width="100%" height="1239" style="background: transparent; border: 1px solid #ccc;"></iframe>
+
+
+
+        </div>
+      </div>
+
+    </div>
+
+
+    <script src="/javascripts/vendor/list.min.js"></script>
+    <script src="/javascripts/main.js"></script>
+
+  </body>
+</html>

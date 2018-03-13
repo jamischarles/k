@@ -10,44 +10,45 @@
     <!-- <h1><%= title %></h1> -->
     <!-- <p>Welcome to <%= title %></p> -->
 
-    <div class="container">
+    <div id="main-container" class="container">
       <div class="row">
         <div class="w-100">
-          Masthead here
+          <% include ./partials/header %>
 
 
           <div class="search-container">
             <!-- <button type="button" class="btn btn-primary">Find jobs near me</button> -->
 
 
-          <% if (!locals.terms) { %>
-            <form id="search-form">
-              <label>Search</label>
-              <input placeholder="Location, tags etc..." type="text">
-            </form>
-          <% } %>
+            <% if (!locals.terms) { %>
+              <form id="search-form">
+                <label>Search</label>
+                <input class="fuzzy-search" placeholder="Location, tags etc..." type="text">
+              </form>
+            <% } %>
 
 
           </div>
 
-          <br>Tag list is here...<br>
-          <% if (locals.terms) { %>
-            <% for(var k=0; k < terms.length; k++) { %>
-              <a href="/removefilter/<%= terms[k] %>" class="badge badge-secondary"><%= terms[k] %> | x</a>
-            <% } %>
+          <div class="tags-filtered">
+            <% if (locals.terms) { %>
+              <% for(var k=0; k < terms.length; k++) { %>
+                <a href="/removefilter/<%= terms[k] %>" class="badge badge-secondary"><%= terms[k] %> | x</a>
+              <% } %>
 
-          <% } %>
+            <% } %>
+          </div>
         </div>
       </div>
 
       <div class="row">
         <div class="col-lg-9 red">
-          <div class="job-list">
+          <div class="job-list list">
 
             <% for(var i=0; i < jobData.length; i++) { %>
               <div class="job-item row">
                 <div class="desc-short col-12">
-                  <div class="job-title"><h5 class="title"><%= jobData[i].title %></h5></div>
+                  <div class="job-title"><h5 data-uid="<%= jobData[i].permalink %>" class="title"><%= jobData[i].title %></h5></div>
 
                   <div class="">
                     <span class="meta">
@@ -58,7 +59,7 @@
                     <span class="job-tags">
 
                       <% for(var j=0; j < jobData[i].tags.length; j++) { %>
-                        <a href="/addfilter/<%= jobData[i].tags[j] %>" class="badge badge-secondary"><%= jobData[i].tags[j] %></a>
+                        <a href="/addfilter/<%= jobData[i].tags[j] %>" class="tag-item badge badge-secondary"><%= jobData[i].tags[j] %></a>
                       <% } %>
                     </span>
                   </div>
@@ -67,7 +68,7 @@
                 <div class="desc-long col-12 hidden">
 
                   <%- jobData[i].details %>
-                  <button type="button" class="btn btn-primary">Apply</button>
+                  <a class="btn btn-primary" target="_blank" href="<%=jobData[i].apply_url %>" role="button">Apply</a>
                 </div>
 
               </div>
@@ -84,6 +85,7 @@
     </div>
 
 
+    <script src="/javascripts/vendor/list.min.js"></script>
     <script src="/javascripts/main.js"></script>
 
   </body>

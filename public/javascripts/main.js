@@ -15,6 +15,7 @@ function toggleDetails(e) {
 
   if (el.classList.contains('hidden')) {
     el.classList.remove('hidden');
+    updateBrowserUrl(target.dataset.uid);
   } else {
     el.classList.add('hidden');
   }
@@ -40,15 +41,22 @@ function addFormListeners() {
   form.addEventListener('submit', e => {
     e.preventDefault();
 
-
-
     document.location = `/filter/${input.value}`;
   });
+}
+
+function updateBrowserUrl(permalink) {
+  window.history.pushState('object or string', 'Title', '/jobs/' + permalink);
 }
 
 function init() {
   addListeners();
   addFormListeners();
+
+  // set up the fuzzy search
+  var jobListing = new List('main-container', {
+    valueNames: ['title', 'location', 'company', 'tag-item'],
+  });
 }
 
 init();
