@@ -1,9 +1,9 @@
 function addListeners() {
-  var shortDesc = document.querySelectorAll('.desc-short');
-  var two = document.getElementById('two');
+  // FIXME: Add a global listener instead of one for each row
+  var jobItems = document.querySelectorAll('.job-item');
 
-  for (var i = 0; i < shortDesc.length; i++) {
-    shortDesc[i].addEventListener('click', toggleDetails);
+  for (var i = 0; i < jobItems.length; i++) {
+    jobItems[i].addEventListener('click', toggleDetails, false);
   }
 }
 
@@ -11,13 +11,17 @@ function toggleDetails(e) {
   var target = e.target;
 
   // fetch long-desc
-  var el = getParentNode(target, '.desc-long');
+  var jobItemEl = getParentNode(target,'.job-item');
+  var detailsEl = jobItemEl.querySelector('.desc-long');
+  // var el = target.querySelector('.desc-long');
 
-  if (el.classList.contains('hidden')) {
-    el.classList.remove('hidden');
+  if (detailsEl.classList.contains('hidden')) {
+    detailsEl.classList.remove('hidden');
+    jobItemEl.classList.add('open'); // make it gray when open
     updateBrowserUrl(target.dataset.uid);
   } else {
-    el.classList.add('hidden');
+    detailsEl.classList.add('hidden');
+    jobItemEl.classList.remove('open');
   }
 }
 

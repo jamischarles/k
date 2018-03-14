@@ -10,10 +10,30 @@
     <!-- <h1><%= title %></h1> -->
     <!-- <p>Welcome to <%= title %></p> -->
 
+
+    <!-- MASTHEAD -->
+    <div class="jumbotron jumbotron-fluid">
+      <div class="logo">J</div>
+
+      <div class="container">
+        <h1 class="display-2">Just Front-end Jobs</h1>
+        <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+        <hr class="my-4">
+        <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
+        <p class="lead">
+        <a class="btn btn-primary btn-lg" href="#" role="button">Post a Job</a>
+        <a class="btn btn-secondary btn-lg" href="#" role="button">Find a Job</a>
+        </p>
+      </div>
+    </div>
+
+
     <div id="main-container" class="container">
-      <div class="row">
-        <div class="w-100">
-          <% include ./partials/header %>
+
+      <!-- Search and Tags -->
+      <div class="row hidden">
+        <div class="center col-lg-9">
+          <!-- <% include ./partials/header %> -->
 
 
           <div class="search-container">
@@ -42,13 +62,45 @@
       </div>
 
       <div class="row">
-        <div class="col-lg-9 red">
+        <div class="col-lg-9 red center">
+
+
+          <div class="row section filters">
+              <h4> Filters</h4>
+<span class="oi oi-map-marker"></span>
+            <div class="w-100 filters-container">
+              <div class="col-sm">
+                <h4 class="filter-subheading">LOCATION (icon)</h4>
+
+                <button type="button" class="btn-sm btn-light">Near me</button>
+                <button type="button" class="btn-sm btn-light">Remote-Friendly</button>
+                <input  class="form-control" placeholder="City, State " style="width: auto; display: inline-block;">
+              </div>
+              <div class="col-sm">
+                <h4 class="filter-subheading">FRAMEWORKS</h4>
+
+                <button type="button" class="btn-sm btn-light">React.js</button>
+                <button type="button" class="btn-sm btn-light">Angular</button>
+                <button type="button" class="btn-sm btn-light">Vue.js</button>
+              </div>
+              <div class="col-sm">
+                <h4 class="filter-subheading">TAGS</h4>
+
+                <button type="button" class="btn-sm btn-light">Senior</button>
+                <button type="button" class="btn-sm btn-light">Junior</button>
+                <button type="button" class="btn-sm btn-light">React Native</button>
+              </div>
+            </div>
+          </div>
+
           <div class="job-list list">
+
+            <hr class="my-4">
 
             <% for(var i=0; i < jobData.length; i++) { %>
               <div class="job-item row">
                 <div class="desc-short col-12">
-                  <div class="job-title"><h5 data-uid="<%= jobData[i].permalink %>" class="title"><%= jobData[i].title %></h5></div>
+                  <div class="job-title"><h4 data-uid="<%= jobData[i].permalink %>" class="title"><%= jobData[i].title %></h4></div>
 
                   <div class="">
                     <span class="meta">
@@ -82,6 +134,17 @@
           right rail will go here...
         </div>
       </div>
+    </div>
+
+
+    <div class="jumbotron jumbotron-fluid footer">
+
+      <div class="container">
+        <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+        <p>GIANT LOGO HERE FADED IN THE BACKGROUND UNDER THE LINKS... The robot guy?</p>
+      </div>
+
+      <!-- <div class="logo">J</div> -->
     </div>
 
 
