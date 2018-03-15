@@ -11,31 +11,36 @@ function toggleDetails(e) {
   var target = e.target;
 
   // fetch long-desc
-  var jobItemEl = getParentNode(target,'.job-item');
+  var jobItemEl = getParentNode(target, '.job-item');
   var detailsEl = jobItemEl.querySelector('.desc-long');
   // var el = target.querySelector('.desc-long');
 
   if (detailsEl.classList.contains('hidden')) {
     detailsEl.classList.remove('hidden');
     jobItemEl.classList.add('open'); // make it gray when open
+    jobItemEl.classList.remove('visited');
     updateBrowserUrl(target.dataset.uid);
   } else {
     detailsEl.classList.add('hidden');
     jobItemEl.classList.remove('open');
+    jobItemEl.classList.add('visited');
   }
 }
 
 // FIXME: this won't work if any of the children have these criteria...
 function getParentNode(currentEl, query) {
+  // FIXME: so hacky
+  // do classes match what the query has?
   var parentFound;
 
   // if result not found, and we can still go upwards the tree...
   while (!parentFound && currentEl.parentNode) {
     currentEl = currentEl.parentNode;
-    parentFound = currentEl.querySelector(query);
+    // parentFound = currentEl.querySelector(query);
+    parentFound = currentEl.classList.contains(query.slice(1)); // FIXME: hacky. Make it easier to check the current node for the query
   }
 
-  return parentFound;
+  return currentEl;
 }
 
 // JS for the search form
