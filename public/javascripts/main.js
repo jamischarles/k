@@ -1,9 +1,36 @@
 function addListeners() {
   // FIXME: Add a global listener instead of one for each row
-  var jobItems = document.querySelectorAll('.job-item');
+  // Add expand / collapse listeners
+  var jobItems = document.querySelectorAll('.desc-short');
 
   for (var i = 0; i < jobItems.length; i++) {
     jobItems[i].addEventListener('click', toggleDetails, false);
+  }
+
+  // add wizard listeners
+
+  var wizardButtons = document.querySelectorAll('.wizard-btn');
+
+  for (var i = 0; i < wizardButtons.length; i++) {
+    wizardButtons[i].addEventListener('click', advanceWizard, false);
+  }
+
+  // add tagbar toggle listeners
+  var tagBarTags = document.querySelectorAll('.btn-group-toggle input');
+
+  for (var i = 0; i < tagBarTags.length; i++) {
+    tagBarTags[i].addEventListener(
+      'click',
+      function(e) {
+        var el = e.target;
+        if (el.parentNode.classList.contains('active')) {
+          el.parentNode.classList.remove('active');
+        } else {
+          el.parentNode.classList.add('active');
+        }
+      },
+      false,
+    );
   }
 }
 
@@ -19,7 +46,7 @@ function toggleDetails(e) {
     detailsEl.classList.remove('hidden');
     jobItemEl.classList.add('open'); // make it gray when open
     jobItemEl.classList.remove('visited');
-    updateBrowserUrl(target.dataset.uid);
+    updateBrowserUrl(jobItemEl.dataset.permalink);
   } else {
     detailsEl.classList.add('hidden');
     jobItemEl.classList.remove('open');
@@ -58,9 +85,47 @@ function updateBrowserUrl(permalink) {
   window.history.pushState('object or string', 'Title', '/jobs/' + permalink);
 }
 
+function getLocation() {
+  var options = {
+    enableHighAccuracy: false,
+    timeout: 5000,
+    maximumAge: 0,
+  };
+
+  function success(pos) {
+    var crd = pos.coords;
+
+    console.log('Your current position is:');
+    console.log(`Latitude : ${crd.latitude}`);
+    console.log(`Longitude: ${crd.longitude}`);
+    console.log(`More or less ${crd.accuracy} meters.`);
+  }
+
+  function error(err) {
+    console.warn(`ERROR(${err.code}): ${err.message}`);
+  }
+
+  navigator.geolocation.getCurrentPosition(success, error, options);
+}
+
+// move to the next step in the wizard...
+function advanceWizard(e) {
+  var currStep = parseInt(e.target.dataset.wstep); //FIXME: add any null soaking? _.get()?
+  if (currStep === 1) {
+    // this comes from anim lib file... TODO: Use parcel for this step...
+    __ANIMATE_SCROLL_TO(document.querySelector('.step-2'));
+  } else {
+    __ANIMATE_SCROLL_TO(document.querySelector('.job-list'));
+  }
+  // which step am I on?
+  // fetch the next step? t
+}
+
 function init() {
   addListeners();
   addFormListeners();
+
+  // getLocation();
 
   // set up the fuzzy search
   var jobListing = new List('main-container', {

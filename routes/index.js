@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 var listingModel = require('../models/listing');
+var utils = require('../utils/index');
 
 const {URL} = require('url');
 
@@ -33,9 +34,12 @@ function getFilteredJobList(jobList = [], terms) {
   return filteredList;
 }
 
-function getJobByID(jobList, permalink) {
+// returns an array
+function getJobByID(jobList, uniqueId) {
   for (var i = 0; i < jobList.length; i++) {
-    if (jobList[i].permalink === permalink) {
+    console.log('uniqueId', typeof uniqueId);
+    console.log('jobList[i].uniqueId', typeof jobList[i].uniqueId);
+    if (jobList[i].uniqueId === uniqueId) {
       return [jobList[i]]; // array with only 1 item
     }
   }
@@ -45,7 +49,7 @@ function getJobByID(jobList, permalink) {
 router.get('/', function(req, res, next) {
   listingModel.getListings(function(err, jobs) {
     // console.log('jobs', jobs);
-    res.render('index', {title: 'Express', jobData: jobs});
+    res.render('index', {title: 'Front-end Rocket Jobs', jobData: jobs});
     // res.render('index', {title: 'Express', jobData: jobData});
   });
 });
@@ -57,7 +61,7 @@ router.get('/filter/:tags', function(req, res, next) {
 
   listingModel.getListings(function(err, jobs) {
     res.render('index', {
-      title: 'Express',
+      title: 'Front-end Rocket Jobs',
       terms: tags,
       jobData: getFilteredJobList(jobs, tags),
     });
@@ -119,12 +123,32 @@ router.get('/removefilter/:tag', function(req, res, next) {
 });
 
 // permalink
-router.get('/jobs/:id', function(req, res, next) {
+router.get('/jobs/:permalink', function(req, res, next) {
   listingModel.getListings(function(err, jobs) {
+    // massage data here... ?
+
+    // if search by permalink doesn't return, then just extract the ID and use that to fetch the proper url
+    // then redirect to that...
+    // if ID search doesn't return anything, then fetch using the
+
+    // ALWAYS search by UNIQUE_ID field. If it doesn't match the permalink passed in, redirect to that...
+
+    // extract id from permalink
+    var uid = parseInt(req.params.permalink.split('-')[0], 10);
+
+    var jobListingArr = getJobByID(jobs, uid);
+    var listingPermalink = jobListingArr[0].permalink;
+
+    // TODO: add 404 or something?
+    if (listingPermalink.length != req.params.permalink.length) {
+      return res.redirect(`/jobs/${listingPermalink}`);
+    }
+
     res.render('index', {
-      title: 'Express',
+      title: 'Front-end Rocket Jobs',
+      singleListing: true,
       terms: [],
-      jobData: getJobByID(jobs, req.params.id),
+      jobData: jobListingArr,
     });
   });
 });
@@ -132,10 +156,39 @@ router.get('/jobs/:id', function(req, res, next) {
 // post
 router.get('/post', function(req, res, next) {
   res.render('post', {
-    title: 'Express',
+    title: 'Front-end Rocket Jobs',
     terms: [],
     jobData: [],
   });
 });
 
+// TODO: create a new url for that? Can we reuse it?
+router.post('/post', function(req, res, next) {
+  var payload = {
+    title: req.body.title,
+    details_long: utils.transformMarkdownToHTML(req.body.detail_body), //convert markdown to html before saving it TODO: add sanitation for all these...
+    company: req.body.company,
+    location: req.body.location,
+    tags: req.body.tags,
+    apply_url: req.body.apply_url,
+    permalink: utils.generatePermalink(req.body.title, req.body.company), // TODO: Add location too?
+    publication_status: 'draft',
+    admin_email: req.body.email,
+  };
+
+  listingModel.createListing(payload, (err, resp) => {
+    // res.json({permalink: resp});
+    res.redirect('/jobs/' + resp);
+  });
+});
+
+// ajax routes
+
+router.post('/import', function(req, res, next) {
+  // var url = URIComponent(req.query.url);
+  var url = req.body.url;
+  utils.getMarkdownFromJobPage(url, function(err, resp) {
+    res.json({markup: resp});
+  });
+});
 module.exports = router;

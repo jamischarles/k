@@ -2,6 +2,7 @@
 <html>
   <head>
     <title><%= title %></title>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,600,700,800,900|Open+Sans:400,600,600i,700" rel="stylesheet">
     <link rel='stylesheet' href='/stylesheets/boot.min.css' />
     <link rel='stylesheet' href='/stylesheets/style.css' />
     <style>.hidden{display:none} /* Avoids FOUC */</style>
@@ -10,21 +11,65 @@
     <!-- <h1><%= title %></h1> -->
     <!-- <p>Welcome to <%= title %></p> -->
 
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg ">
+      <a class="navbar-brand" href="/">
+        <!-- <img src="/images/logo1.png" width="30" height="30" alt=""> -->
+        <img src="/images/logo2x.png" style="width:200px" alt="">
+      </a>
+
+      <div class="collapse navbar-collapse order-3 dual-collapse2" id="navbarSupportedContent" style="position: absolute; right: 30px;">
+        <ul class="navbar-nav mr-auto">
+          <!-- <li class="nav-item active"> -->
+          <!--   <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a> -->
+          <!-- </li> -->
+          <li class="nav-item">
+            <a class="nav-link" href="/post">Post a job</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
 
     <!-- MASTHEAD -->
-    <div class="jumbotron jumbotron-fluid">
-      <div class="logo">J</div>
+    <div class="jumbotron jumbotron-fluid ">
 
-      <div class="container">
-        <h1 class="display-2">Just Front-end Jobs</h1>
-        <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
-        <hr class="my-4">
-        <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
-        <p class="lead">
-        <a class="btn btn-primary btn-lg" href="#" role="button">Post a Job</a>
-        <a class="btn btn-secondary btn-lg" href="#" role="button">Find a Job</a>
-        </p>
-      </div>
+        <div class="wizard-container section">
+
+          <h2 class="main-hero-text">Just Front-end Jobs</h2>
+          <div class="row wizard w-100">
+
+            <div class="center step-2">
+              <a class="btn btn-primary btn-lg small-type wizard-btn" href="#" role="button" data-wstep="1">I&apos;M LOOKING FOR A JOB</a>
+              <a class="btn btn-secondary btn-lg small-type" href="/post" role="button">I WANT TO POST A JOB</a>
+            </div>
+          </div>
+
+          <div class="row wizard hidden">
+
+            <div class="center step-2">
+              <h5>I&apos;m interested in...</h4>
+              <div>
+                <button type="button" class="btn-sm btn-light">React</button>
+                <button type="button" class="btn-sm btn-light">AI</button>
+                <button type="button" class="btn-sm btn-light">Robots</button>
+                <button type="button" class="btn-sm btn-light">Education</button>
+                <button type="button" class="btn-sm btn-light">VR</button>
+                <button type="button" class="btn-sm btn-light">Machine Learning</button>
+                <button type="button" class="btn-sm btn-light">Angular</button>
+                <button type="button" class="btn-sm btn-light">Charity</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="row wizard hidden">
+            <div class="center step-3">
+              <div>
+                <button type="button" class="btn-lg small-type btn-primary wizard-btn" data-wstep="3">All done. Show me the jobs</button>
+              </div>
+            </div>
+          </div>
+        </div>
     </div>
 
 
@@ -34,7 +79,12 @@
         <div class="col-lg-9 red center">
 
 
-          <div class="row section filters">
+
+
+
+
+
+          <div class="row filters hidden">
             <div class="w-100 filters-container" style="border-bottom: 2px solid white; ">
               <!-- <h4> Filter by</h4> -->
               <h4 class="filter-subheading">FILTER BY LOCATION</h4>
@@ -52,10 +102,58 @@
             </div>
         </div>
 
+        <div class="wizard-container section hidden">
+          <div class="row wizard w-100">
+
+            <div class="center step-1">
+              <a class="btn btn-primary btn-lg small-type wizard-btn" href="#" role="button" data-wstep="1">I&apos;M LOOKING FOR A JOB</a>
+              <a class="btn btn-secondary btn-lg small-type" href="/post" role="button">I WANT TO POST A JOB</a>
+            </div>
+          </div>
+
+          <div class="row wizard">
+
+            <div class="center step-2">
+              <h5>I&apos;m interested in...</h4>
+              <div>
+                <button type="button" class="btn-sm btn-light">React</button>
+                <button type="button" class="btn-sm btn-light">AI</button>
+                <button type="button" class="btn-sm btn-light">Robots</button>
+                <button type="button" class="btn-sm btn-light">Education</button>
+                <button type="button" class="btn-sm btn-light">VR</button>
+                <button type="button" class="btn-sm btn-light">Machine Learning</button>
+                <button type="button" class="btn-sm btn-light">Angular</button>
+                <button type="button" class="btn-sm btn-light">Charity</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="row wizard">
+            <div class="center step-3">
+              <div>
+                <button type="button" class="btn-lg small-type btn-primary wizard-btn" data-wstep="3">All done. Show me the jobs</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Wizard Container -->
+
+
+        <div class="row hidden">
+            <div class="w-100 filters-container" style="border-bottom: 2px solid white; ">
+              <!-- <h4> Filter by</h4> -->
+              <h4 class="filter-subheading">LOCATION</h4>
+
+              <button type="button" class="btn-sm btn-light">Near me</button>
+              <button type="button" class="btn-sm btn-light">Remote-Friendly</button>
+              <input  class="form-control btn-sm" placeholder="City, State " style="width: auto; display: inline-block;">
+            </div>
+        </div>
+
 
 
         <!-- Search and Tags -->
-        <div class="row section">
+        <div class="row section " style="margin-top:40px;">
           <div class="center col-lg-9">
             <!-- <% include ./partials/header %> -->
 
@@ -65,10 +163,10 @@
 
 
               <% if (!locals.terms) { %>
-                <form id="search-form">
+                <!-- <form id="search-form"> -->
                   <!-- <label>Search</label> -->
-                  <input class="form-control fuzzy-search" style="padding: 0.375rem 1.25rem; font-size: 1.5rem; line-height: 2;" placeholder="Search by location, tags, company..." type="text">
-                </form>
+                  <!-- <input class="form-inline fuzzy-search" placeholder="Search by location, tags, company..." type="text"> -->
+                <!-- </form> -->
               <% } %>
 
 
@@ -87,17 +185,73 @@
         <!-- END SEARCH OF TAGS-->
 
 
+          <div class="job-list list section">
+            <!-- <h4 class="filter-subheading">LATEST FRONT-END JOBS</h4> -->
+            <h4 class="filter-subheading">Showing the best jobs for you</h4>
+            <form id="search-form" class="float-right" style="display:none">
+              <!-- <label>Search</label> -->
+              <input class="form-inline fuzzy-search" style="display:none" placeholder="Search by location, tags, company..." type="text">
+            </form>
 
-          <div class="job-list list">
-            <h4 class="filter-subheading">LATEST FRONT-END JOBS</h4>
+            <div class="w-100 filters-container hidden">
+              <h4 class="filter-subheading">FILTERS</h4> <br>
+              <select class="selectpicker">
+                <option>Near me</option>
+                <option>Remote Only</option>
+                <option>Near ____ FIXME</option>
+              </select>
+
+              <button type="button" class="btn-sm btn-light"></button>
+              <button type="button" class="btn-sm btn-light">Junior</button>
+              <button type="button" class="btn-sm btn-light">React Native</button>
+
+              <div class="btn-group-toggle" data-toggle="buttons">
+                <label class="btn btn-light">
+                  <input type="checkbox" checked autocomplete="off">React
+                </label>
+                <label class="btn btn-light tag-btn">
+                  <input type="checkbox" checked autocomplete="off">Junior
+                </label>
+              </div>
+
+
+              More tags: (mega dropdown?) <strong>Add more tags</strong>
+            </div>
+
+            <div class="row filters w-100">
+              <div class="w-100 filters-container" style="border-bottom: 2px solid white; ">
+                <!-- <h4> Filter by</h4> -->
+                <h4 class="filter-subheading">FILTER BY LOCATION</h4>
+
+                <button type="button" class="btn-sm btn-light active">Near me</button>
+                <button type="button" class="btn-sm btn-light">Remote-Friendly</button>
+                <input class="form-control btn-sm" placeholder="City, State " style="width: auto; display: inline-block;">
+              </div>
+              <div class="w-100 filters-container hidden">
+                <h4 class="filter-subheading">FILTER BY TAGS</h4>
+
+                <button type="button" class="btn-sm btn-light">Senior</button>
+                <button type="button" class="btn-sm btn-light">Junior</button>
+                <button type="button" class="btn-sm btn-light">React Native</button>
+                <button type="button" class="btn-sm btn-light">Angular</button>
+                <button type="button" class="btn-sm btn-light">Vue.js</button>
+                <button type="button" class="btn-sm btn-light">Startup</button>
+                <button type="button" class="btn-sm btn-light">Charity</button>
+                <button type="button" class="btn-sm btn-light">Large company</button>
+                <a href="#">Show more</a>
+              </div>
+            </div>
+
             <% for(var i=0; i < jobData.length; i++) { %>
-              <div class="job-item row">
+
+
+              <div class="job-item row" data-permalink="<%= jobData[i].permalink %>">
                 <div class="desc-short col-12">
-                  <div class="job-title"><h4 data-uid="<%= jobData[i].permalink %>" class="title"><%= jobData[i].title %></h4></div>
+                  <div class="job-title"><h4 class="title"><%= jobData[i].title %></h4></div>
 
                   <div class="">
                     <span class="meta">
-                      <strong class="company"><a href="/filter/search?company=<%=jobData[i].company %>"><%= jobData[i].company %></a></strong> in
+                      <span class="company"><a href="/filter/search?company=<%=jobData[i].company %>"><%= jobData[i].company %></a></span> in
                       <span class="location"><a href="/filter/search?location=<%=jobData[i].location%>"><%= jobData[i].location %></a></span>
                     </span>
 
@@ -110,7 +264,10 @@
                   </div>
                 </div>
 
-                <div class="desc-long col-12 hidden">
+
+              <% if (locals.singleListing && singleListing === true) {className = 'open';} else {className='hidden'} %>
+
+              <div class="desc-long col-12 <%=className %>">
 
                   <%- jobData[i].details %>
                   <a class="btn btn-primary" target="_blank" href="<%=jobData[i].apply_url %>" role="button">Apply</a>
@@ -130,7 +287,7 @@
     </div>
 
 
-    <div class="jumbotron jumbotron-fluid footer">
+    <div class="jumbotron jumbotron-fluid footer hidden">
 
       <div class="container">
         <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
@@ -140,7 +297,16 @@
       <!-- <div class="logo">J</div> -->
     </div>
 
+    <!-- FOOTER -->
+    <nav class="navbar navbar-expand-lg ">
+      <a class="navbar-brand center" href="/">
+        <!-- <img src="/images/logo1.png" width="30" height="30" alt=""> -->
+        <img src="/images/logo2x.png" style="width:200px" alt="">
+      </a>
+    </nav>
 
+
+    <script src="/javascripts/vendor/animated-scroll-to.js"></script>
     <script src="/javascripts/vendor/list.min.js"></script>
     <script src="/javascripts/main.js"></script>
 

@@ -4,30 +4,173 @@
     <title><%= title %></title>
     <link rel='stylesheet' href='/stylesheets/boot.min.css' />
     <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,600,700,800,900|Open+Sans:400,700" rel="stylesheet">
     <style>.hidden{display:none} /* Avoids FOUC */</style>
   </head>
   <body>
     <!-- <h1><%= title %></h1> -->
     <!-- <p>Welcome to <%= title %></p> -->
 
+    <!-- Hidden Form -->
+    <form id="form-post" class="hidden" action="/post" method="POST">
+      <input name="title">
+      <input name="location">
+      <input name="company">
+      <input name="email">
+      <input name="tags">
+      <input name="apply_url">
+      <textarea name="detail_body"></textarea>
+    </form>
+
+
+
+    <nav class="navbar navbar-expand-lg ">
+      <a class="navbar-brand" href="/">
+        <!-- <img src="/images/logo1.png" width="30" height="30" alt=""> -->
+        <img src="/images/logo2x.png" style="width:25%" alt="">
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse order-3 dual-collapse2" id="navbarSupportedContent" style="position: absolute; right: 30px;">
+        <ul class="navbar-nav mr-auto">
+          <!-- <li class="nav-item active"> -->
+          <!--   <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a> -->
+          <!-- </li> -->
+          <li class="nav-item">
+            <a class="nav-link" href="/post">Post a job</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+
+    <!-- MASTHEAD -->
+    <div class="jumbotron jumbotron-fluid ">
+
+        <div class="wizard-container section">
+
+          <h2 class="main-hero-text">Just Front-end Jobs</h2>
+          <div class="row wizard w-100">
+
+            <div class="center step-1">
+              <a class="btn btn-primary btn-lg small-type wizard-btn" href="#" role="button" data-wstep="1">I&apos;M LOOKING FOR A JOB</a>
+              <a class="btn btn-secondary btn-lg small-type" href="/post" role="button">I WANT TO POST A JOB</a>
+            </div>
+          </div>
+
+          <div class="row wizard">
+
+            <div class="center step-2">
+              <h5>I&apos;m interested in...</h4>
+              <div>
+                <button type="button" class="btn-sm btn-light">React</button>
+                <button type="button" class="btn-sm btn-light">AI</button>
+                <button type="button" class="btn-sm btn-light">Robots</button>
+                <button type="button" class="btn-sm btn-light">Education</button>
+                <button type="button" class="btn-sm btn-light">VR</button>
+                <button type="button" class="btn-sm btn-light">Machine Learning</button>
+                <button type="button" class="btn-sm btn-light">Angular</button>
+                <button type="button" class="btn-sm btn-light">Charity</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="row wizard">
+            <div class="center step-3">
+              <div>
+                <button type="button" class="btn-lg small-type btn-primary wizard-btn" data-wstep="3">All done. Show me the jobs</button>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+
     <div id="main-container" class="container">
+
       <div class="row">
-        <div class="w-100">
-          <% include ./partials/header %>
+        <div>
+          <!-- <% include ./partials/header %> -->
+
+          <!-- <script src="https://static.airtable.com/js/embed/embed_snippet_v1.js"></script><iframe class="airtable-embed airtable-dynamic-height" src="https://airtable.com/embed/shrxwXmhcWU2xoydi?backgroundColor=red" frameborder="0" onmousewheel="" width="100%" height="1239" style="background: transparent; border: 1px solid #ccc;"></iframe> -->
+
+            <!-- <form> -->
+
+              <h4>Job Sumary</h4>
+              TODO: right col: preview?
+              <div class="form-group">
+                <label for="exampleFormControlInput1">Job Title</label>
+                <input type="text" class="form-control" id="exampleFormControlInput1" data-name="title" placeholder="ie: Sr UI Engineer">
+              </div>
+              <div class="form-group">
+                <label for="exampleFormControlInput1">Company</label>
+                <input type="text" class="form-control" id="exampleFormControlInput1" data-name="company" placeholder="ie: Acme Inc">
+              </div>
+
+              <div class="form-group">
+                <label for="exampleFormControlInput1">Location</label>
+                <input type="text" class="form-control" id="exampleFormControlInput1" data-name="location" placeholder="ie: Seattle, WA">
+              </div>
+
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                <label class="form-check-label" for="defaultCheck1">
+                  Remote ok (TODO: FIX THIS)
+                </label>
+              </div>
+
+              <div class="form-group">
+                <label for="exampleFormControlInput1">Your email address (not shown)</label>
+                <input type="email" class="form-control" id="exampleFormControlInput1" data-name="email" placeholder="ie: name@example.com">
+              </div>
 
 
-          <script src="https://static.airtable.com/js/embed/embed_snippet_v1.js"></script><iframe class="airtable-embed airtable-dynamic-height" src="https://airtable.com/embed/shrxwXmhcWU2xoydi?backgroundColor=red" frameborder="0" onmousewheel="" width="100%" height="1239" style="background: transparent; border: 1px solid #ccc;"></iframe>
+
+              <div class="form-group">
+                <label for="exampleFormControlInput1">Tags</label>
+                <input type="text" class="form-control" id="exampleFormControlInput1" data-name="tags" placeholder="ie: React, Node.js">
+              </div>
+
+              <div class="form-group">
+                <label for="exampleFormControlInput1">Apply Url</label>
+                <input type="text" class="form-control" id="form-apply-url" data-name="apply_url" placeholder="ie: www.someurl.com">
+                <button type="button" class="btn-sm btn-secondary btn-import">Import from apply url page</button>
+              </div>
 
 
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+
+              <h4>Job Details</h4>
+
+              <div class="form-group">
+                <label for="exampleFormControlTextarea1">Example textarea</label>
+                <textarea data-name="detail_body" class="form-control markdown-src" placeholder="Markdown format. Anything besides text will be stripped out " id="exampleFormControlTextarea1" rows="3"></textarea>
+              </div>
+
+
+              <button id="btn-next" class="btn btn-primary">Post</button>
+          </div>
+
+          <div class="col">
+
+              <h4>Job Preview</h4>
+              How your listing details will appear
+
+              <div class="markdown-dest" style="border: 1px solid black; padding: 15px;">Test</div>
+          </div>
 
         </div>
-      </div>
 
     </div>
 
 
-    <script src="/javascripts/vendor/list.min.js"></script>
-    <script src="/javascripts/main.js"></script>
+    <script src="/javascripts/vendor/axios.js"></script>
+    <script src="/javascripts/vendor/showdown.min.js"></script>
+    <script src="/javascripts/post.js"></script>
 
   </body>
 </html>
